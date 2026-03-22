@@ -10,12 +10,12 @@ socketio = SocketIO(app, cors_allowed_origins="*")
 
 messages = []
 
-# ✅ MAIN PAGE
+# MAIN PAGE
 @app.route("/")
 def index():
     return send_from_directory("static", "index.html")
 
-# ✅ ADMIN PAGE
+# ADMIN PAGE
 @app.route("/admin")
 def admin():
     return send_from_directory("static", "admin.html")
@@ -36,7 +36,7 @@ def send_message(data):
     messages.append(msg)
     socketio.emit("receive_message", msg)
 
-# GET MESSAGES (ADMIN)
+# GET ALL MESSAGES (ADMIN)
 @socketio.on("get_messages")
 def get_messages():
     socketio.emit("all_messages", messages)

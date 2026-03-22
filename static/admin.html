@@ -1,26 +1,33 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>🕵️‍♂️ நிர்வாகி குழு</title>
-<link rel="stylesheet" href="style.css">
+    <title>🛕 தமிழ் அரட்டை</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+
+    <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
 </head>
+
 <body>
 
-<div class="header">🕵️‍♂️ தமிழ் நிர்வாகி குழு</div>
+<div class="header">🛕 தமிழ் பாதுகாப்பான அரட்டை</div>
 
 <div id="login">
-    <input id="adminPass" placeholder="நிர்வாகி கடவுச்சொல்">
-    <button onclick="adminLogin()">உள் நுழைய</button>
+    <input id="username" placeholder="உங்கள் பெயர்">
+    <button onclick="login()">உள் நுழை</button>
 </div>
 
 <div id="chat-container" style="display:none;">
-    <h3>🔐 குறியாக்கப்பட்ட செய்திகள்</h3>
     <div id="chat"></div>
+
+    <div class="input-box">
+        <input id="msg" placeholder="செய்தி...">
+        <button onclick="sendMessage()">அனுப்பு</button>
+    </div>
 </div>
 
-<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
-<script src="admin.js"></script>
-<script src="floating.js"></script>
+<script src="/static/app.js"></script>
+<script src="/static/floating.js"></script>
+
 </body>
 </html>
