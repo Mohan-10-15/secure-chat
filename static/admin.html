@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<title>🕵️‍♂️ நிர்வாகி குழு</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="header">🕵️‍♂️ தமிழ் நிர்வாகி குழு</div>
+
+<div id="login">
+    <input id="adminPass" placeholder="நிர்வாகி கடவுச்சொல்">
+    <button onclick="adminLogin()">உள் நுழைய</button>
+</div>
+
+<div id="chat-container" style="display:none;">
+    <h3>🔐 குறியாக்கப்பட்ட செய்திகள்</h3>
+    <div id="chat"></div>
+</div>
+
+<script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
+<script src="admin.js"></script>
+<script src="floating.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "Tamil Secure Chat",
+  "short_name": "TSC",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#6b4c1e",
+  "icons": [
+    {"src":"icon.png","sizes":"192x192","type":"image/png"}
+  ]
+}
