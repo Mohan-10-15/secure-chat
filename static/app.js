@@ -2,11 +2,15 @@ const BACKEND_URL = window.location.origin;
 
 let socket;
 let USER;
+let ROOM;
 
 function login() {
     USER = document.getElementById("username").value;
+    ROOM = document.getElementById("room").value;
 
     socket = io(BACKEND_URL);
+
+    socket.emit("join", { room: ROOM });
 
     socket.on("receive_message", showMessage);
 
@@ -19,7 +23,8 @@ function sendMessage() {
 
     socket.emit("send_message", {
         user: USER,
-        message: btoa(msg) // simple encryption
+        message: btoa(msg),
+        room: ROOM
     });
 
     document.getElementById("msg").value = "";

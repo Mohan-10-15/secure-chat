@@ -21,7 +21,7 @@ function adminLogin() {
         data.forEach(msg => {
             chat.innerHTML += `
                 <div class="msg hacker">
-                    <b>${msg.user}</b><br>
+                    <b>${msg.user} (Room: ${msg.room})</b><br>
                     ${msg.message}
                 </div>
             `;
@@ -33,7 +33,7 @@ function adminLogin() {
 
         chat.innerHTML += `
             <div class="msg hacker">
-                <b>${msg.user}</b><br>
+                <b>${msg.user} (Room: ${msg.room})</b><br>
                 ${msg.message}
             </div>
         `;
