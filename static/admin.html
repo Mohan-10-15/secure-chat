@@ -2,32 +2,27 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>🕵️ Admin Panel</title>
+    <title>🕵️ Admin</title>
 
-    <!-- STYLE -->
     <link rel="stylesheet" href="/static/style.css">
 
-    <!-- SOCKET -->
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
 </head>
 
 <body>
 
-<div class="header">🕵️ Admin Panel - குறியாக்க கண்காணிப்பு</div>
+<div class="header">🕵️ Admin Panel</div>
 
-<!-- LOGIN -->
 <div id="login">
-    <input id="adminPass" type="password" placeholder="Admin Password">
+    <input id="adminPass" placeholder="Password">
     <button onclick="adminLogin()">Login</button>
 </div>
 
-<!-- CHAT VIEW -->
 <div id="chat-container" style="display:none;">
     <h3>🔐 Encrypted Messages</h3>
     <div id="chat"></div>
 </div>
 
-<!-- SCRIPT -->
 <script src="/static/admin.js"></script>
 
 </body>

@@ -12,10 +12,12 @@ function adminLogin() {
 
     socket = io(BACKEND_URL);
 
+    let chat = document.getElementById("chat");
+
+    // LOAD OLD
     socket.emit("get_messages");
 
     socket.on("all_messages", (data) => {
-        let chat = document.getElementById("chat");
         chat.innerHTML = "";
 
         data.forEach(msg => {
@@ -28,9 +30,8 @@ function adminLogin() {
         });
     });
 
+    // 🔥 LIVE UPDATE FIX
     socket.on("receive_message", (msg) => {
-        let chat = document.getElementById("chat");
-
         chat.innerHTML += `
             <div class="msg hacker">
                 <b>${msg.user} (Room: ${msg.room})</b><br>

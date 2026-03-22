@@ -1,7 +1,4 @@
-const letters = [
-'அ','ஆ','இ','ஈ','உ','ஊ','எ','ஏ','ஐ','ஒ','ஓ',
-'க','ங','ச','ஞ','ட','ண','த','ந','ப','ம','ய','ர','ல','வ','ழ','ள'
-];
+const letters = ['அ','ஆ','இ','ஈ','உ','ஊ','எ','ஏ','ஐ','ஒ','ஓ','க','ங','ச','ஞ','ட','ண','த','ந','ப','ம'];
 
 setInterval(() => {
     const el = document.createElement("span");
@@ -11,10 +8,8 @@ setInterval(() => {
     el.style.position = "fixed";
     el.style.left = Math.random() * window.innerWidth + "px";
     el.style.top = window.innerHeight + "px";
-
-    el.style.fontSize = "25px";
-    el.style.opacity = "0.5";
-    el.style.color = "#3e2a14";
+    el.style.opacity = "0.4";
+    el.style.fontSize = "24px";
 
     document.body.appendChild(el);
 

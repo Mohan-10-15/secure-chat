@@ -18,11 +18,12 @@ def index():
 def admin():
     return send_from_directory("static", "admin.html")
 
+# JOIN ROOM
 @socketio.on("join")
 def on_join(data):
-    room = data["room"]
-    join_room(room)
+    join_room(data["room"])
 
+# SEND MESSAGE
 @socketio.on("send_message")
 def send_message(data):
     msg = {
@@ -34,9 +35,13 @@ def send_message(data):
 
     messages.append(msg)
 
-    # send only to that room
+    # 🔥 send to room users
     socketio.emit("receive_message", msg, to=data["room"])
 
+    # 🔥 ALSO send to admin (VERY IMPORTANT FIX)
+    socketio.emit("receive_message", msg)
+
+# ADMIN GET ALL
 @socketio.on("get_messages")
 def get_messages():
     socketio.emit("all_messages", messages)
