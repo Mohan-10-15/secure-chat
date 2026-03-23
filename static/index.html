@@ -2,16 +2,21 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>🛕 தமிழ் அரட்டை</title>
+    <title>🛕 தமிழ் பாதுகாப்பு அரட்டை</title>
 
     <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="/static/logo.png">
+
+    <!-- PWA -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#caa472">
 
     <script src="https://cdn.socket.io/4.0.1/socket.io.min.js"></script>
 </head>
 
 <body>
 
-<div class="header">🛕 தமிழ் பாதுகாப்பான அரட்டை</div>
+<div class="header">🛕 தமிழ் பாதுகாப்பு அரட்டை</div>
 
 <div id="login">
     <input id="username" placeholder="பெயர்">
@@ -30,6 +35,13 @@
 
 <script src="/static/app.js"></script>
 <script src="/static/floating.js"></script>
+
+<!-- PWA -->
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/static/service-worker.js');
+}
+</script>
 
 </body>
 </html>

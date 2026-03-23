@@ -14,7 +14,6 @@ function adminLogin() {
 
     let chat = document.getElementById("chat");
 
-    // LOAD OLD
     socket.emit("get_messages");
 
     socket.on("all_messages", (data) => {
@@ -30,7 +29,6 @@ function adminLogin() {
         });
     });
 
-    // 🔥 LIVE UPDATE FIX
     socket.on("receive_message", (msg) => {
         chat.innerHTML += `
             <div class="msg hacker">

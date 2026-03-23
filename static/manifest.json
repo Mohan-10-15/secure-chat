@@ -1,11 +1,20 @@
 {
-  "name": "Tamil Secure Chat",
-  "short_name": "TSC",
-  "start_url": "index.html",
+  "name": "தமிழ் பாதுகாப்பு அரட்டை",
+  "short_name": "தமிழ் Chat",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#6b4c1e",
+  "background_color": "#caa472",
+  "theme_color": "#caa472",
   "icons": [
-    {"src":"icon.png","sizes":"192x192","type":"image/png"}
+    {
+      "src": "/static/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
   ]
 }
