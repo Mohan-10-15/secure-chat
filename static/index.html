@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>🛕 தமிழ் பாதுகாப்பு அரட்டை</title>
+    <title>🛕 தமிழ் பாதுகாப்பு செய்தி</title>
 
     <link rel="stylesheet" href="/static/style.css">
     <link rel="icon" href="/static/logo.png">
@@ -16,12 +16,19 @@
 
 <body>
 
-<div class="header">🛕 தமிழ் பாதுகாப்பு அரட்டை</div>
+<div class="header">🛕 தமிழ் பாதுகாப்பு செய்தி</div>
 
 <div id="login">
     <input id="username" placeholder="பெயர்">
     <input id="room" placeholder="Room ID">
     <button onclick="login()">உள் நுழை</button>
+
+    <!-- ✅ LOGIN FOOTER ONLY -->
+    <footer class="login-footer">
+        <p>👨‍💻 உருவாக்கியது: Mohanakrishnan C</p>
+        <p>🛡️ Cyber Security Student • 2026</p>
+        <p>© 2026 Mohanakrishnan C</p>
+    </footer>
 </div>
 
 <div id="chat-container" style="display:none;">
@@ -36,7 +43,6 @@
 <script src="/static/app.js"></script>
 <script src="/static/floating.js"></script>
 
-<!-- PWA -->
 <script>
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/static/service-worker.js');

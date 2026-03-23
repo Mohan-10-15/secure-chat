@@ -9,7 +9,6 @@ setInterval(() => {
     el.style.left = Math.random() * window.innerWidth + "px";
     el.style.top = window.innerHeight + "px";
     el.style.opacity = "0.4";
-    el.style.fontSize = "24px";
 
     document.body.appendChild(el);
 

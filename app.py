@@ -33,7 +33,7 @@ def send_message(data):
 
     messages.append(msg)
 
-    # ✅ FIXED: no duplicate
+    # ✅ No duplicate
     socketio.emit("receive_message", msg, to=data["room"])
 
 @socketio.on("get_messages")

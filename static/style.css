@@ -46,3 +46,11 @@ body {
 .input-box button {
     padding: 10px;
 }
+
+/* ✅ LOGIN FOOTER */
+.login-footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #3e2a14;
+}
