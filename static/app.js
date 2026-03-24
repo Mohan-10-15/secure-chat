@@ -4,8 +4,11 @@ let socket;
 let USER;
 let ROOM;
 
-// shared secret (demo)
+// 🔐 encryption key
 const SECRET = "tamil-secure-key";
+
+// ✅ prevent duplicate messages
+let shownMessages = new Set();
 
 function login() {
     USER = document.getElementById("username").value;
@@ -17,21 +20,25 @@ function login() {
 
     socket.on("receive_message", showMessage);
 
-    // 🔥 LOAD HISTORY
+    // ✅ LOAD HISTORY
     socket.on("room_history", (msgs) => {
-        msgs.forEach(showMessage);
+        msgs.forEach(msg => {
+            if (!shownMessages.has(msg.id)) {
+                showMessage(msg);
+            }
+        });
     });
 
     document.getElementById("login").style.display = "none";
     document.getElementById("chat-container").style.display = "block";
 }
 
-// 🔐 ENCRYPT
+// 🔐 encrypt
 function encrypt(text) {
     return CryptoJS.AES.encrypt(text, SECRET).toString();
 }
 
-// 🔓 DECRYPT
+// 🔓 decrypt
 function decrypt(cipher) {
     try {
         return CryptoJS.AES.decrypt(cipher, SECRET).toString(CryptoJS.enc.Utf8);
@@ -53,6 +60,9 @@ function sendMessage() {
 }
 
 function showMessage(data) {
+    if (shownMessages.has(data.id)) return;
+    shownMessages.add(data.id);
+
     let chat = document.getElementById("chat");
 
     let text = decrypt(data.message);

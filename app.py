@@ -3,12 +3,12 @@ from flask_socketio import SocketIO, join_room
 from flask_cors import CORS
 from datetime import datetime
 import os
+import uuid
 
 app = Flask(__name__, static_folder="static")
 CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-# store messages per room
 messages = {}
 
 @app.route("/")
@@ -24,7 +24,6 @@ def on_join(data):
     room = data["room"]
     join_room(room)
 
-    # send old messages of that room
     if room in messages:
         socketio.emit("room_history", messages[room], to=room)
 
@@ -33,26 +32,23 @@ def send_message(data):
     room = data["room"]
 
     msg = {
+        "id": str(uuid.uuid4()),  # ✅ FIX DUPLICATE
         "user": data["user"],
         "message": data["message"],  # encrypted
         "room": room,
         "time": datetime.now().strftime("%H:%M")
     }
 
-    # save per room
     if room not in messages:
         messages[room] = []
+
     messages[room].append(msg)
 
-    # send to users in room
     socketio.emit("receive_message", msg, to=room)
-
-    # send to admin
-    socketio.emit("receive_message", msg)
+    socketio.emit("receive_message", msg)  # admin
 
 @socketio.on("get_messages")
 def get_messages():
-    # flatten all messages
     all_msgs = []
     for room_msgs in messages.values():
         all_msgs.extend(room_msgs)

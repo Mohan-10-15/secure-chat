@@ -23,7 +23,7 @@ function adminLogin() {
             chat.innerHTML += `
                 <div class="msg hacker">
                     <b>${msg.user} (Room: ${msg.room})</b><br>
-                    ${msg.message} <!-- encrypted -->
+                    ${msg.message}
                 </div>
             `;
         });
