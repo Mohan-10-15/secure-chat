@@ -4,6 +4,9 @@ let socket;
 let USER;
 let ROOM;
 
+// shared secret (demo)
+const SECRET = "tamil-secure-key";
+
 function login() {
     USER = document.getElementById("username").value;
     ROOM = document.getElementById("room").value;
@@ -14,8 +17,27 @@ function login() {
 
     socket.on("receive_message", showMessage);
 
+    // 🔥 LOAD HISTORY
+    socket.on("room_history", (msgs) => {
+        msgs.forEach(showMessage);
+    });
+
     document.getElementById("login").style.display = "none";
     document.getElementById("chat-container").style.display = "block";
+}
+
+// 🔐 ENCRYPT
+function encrypt(text) {
+    return CryptoJS.AES.encrypt(text, SECRET).toString();
+}
+
+// 🔓 DECRYPT
+function decrypt(cipher) {
+    try {
+        return CryptoJS.AES.decrypt(cipher, SECRET).toString(CryptoJS.enc.Utf8);
+    } catch {
+        return "🔒";
+    }
 }
 
 function sendMessage() {
@@ -23,7 +45,7 @@ function sendMessage() {
 
     socket.emit("send_message", {
         user: USER,
-        message: btoa(msg),
+        message: encrypt(msg),
         room: ROOM
     });
 
@@ -33,7 +55,7 @@ function sendMessage() {
 function showMessage(data) {
     let chat = document.getElementById("chat");
 
-    let text = atob(data.message);
+    let text = decrypt(data.message);
 
     let align = data.user === USER ? "right" : "left";
 

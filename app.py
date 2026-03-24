@@ -8,7 +8,8 @@ app = Flask(__name__, static_folder="static")
 CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
-messages = []
+# store messages per room
+messages = {}
 
 @app.route("/")
 def index():
@@ -20,25 +21,43 @@ def admin():
 
 @socketio.on("join")
 def on_join(data):
-    join_room(data["room"])
+    room = data["room"]
+    join_room(room)
+
+    # send old messages of that room
+    if room in messages:
+        socketio.emit("room_history", messages[room], to=room)
 
 @socketio.on("send_message")
 def send_message(data):
+    room = data["room"]
+
     msg = {
         "user": data["user"],
-        "message": data["message"],
-        "room": data["room"],
+        "message": data["message"],  # encrypted
+        "room": room,
         "time": datetime.now().strftime("%H:%M")
     }
 
-    messages.append(msg)
+    # save per room
+    if room not in messages:
+        messages[room] = []
+    messages[room].append(msg)
 
-    # ✅ No duplicate
-    socketio.emit("receive_message", msg, to=data["room"])
+    # send to users in room
+    socketio.emit("receive_message", msg, to=room)
+
+    # send to admin
+    socketio.emit("receive_message", msg)
 
 @socketio.on("get_messages")
 def get_messages():
-    socketio.emit("all_messages", messages)
+    # flatten all messages
+    all_msgs = []
+    for room_msgs in messages.values():
+        all_msgs.extend(room_msgs)
+
+    socketio.emit("all_messages", all_msgs)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
